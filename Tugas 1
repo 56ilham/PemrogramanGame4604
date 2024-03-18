@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string>
+
+
+using namespace std;
+class Player {
+private:
+    int hp;
+    int mana;
+    int damage;
+    string equipped_sword;
+    int inventory[2];
+
+public:
+    Player(int _hp = 100, int _mana = 110, int _damage = 100, string _equipped_sword = "Basic Sword") : hp(_hp), mana(_mana), damage(_damage), equipped_sword(_equipped_sword) {
+        inventory[0] = 3;
+        inventory[1] = 2;
+    }
+
+    void display_status() {
+        cout << "Status Pemain:" << endl;
+        cout << "HP: " << hp << endl;
+        cout << "Mana: " << mana << endl;
+        cout << "Damage: " << damage << endl;
+        cout << "Senjata Terpasang: " << equipped_sword << endl;
+        cout << "Inventaris:" << endl;
+        cout << "Potion: " << inventory[0] << endl;
+        cout << "Adrenalin: " << inventory[1] << endl;
+    }
+
+    void use_item(int pilihan) {
+        if (pilihan == 1 && inventory[0] > 0) {
+            hp += 50;
+            inventory[0] -= 1;
+            cout << "Pemain mememilih potion. HP +50" << endl;
+        } else if (pilihan == 2 && inventory[1] > 0) {
+            mana += 30;
+            inventory[1] -= 1;
+            cout << "Pemain memilih adrenalin. Mana +30" << endl;
+        } else {
+            cout << "Stok sudah penuh " << endl;
+        }
+    }
+};
+
+int main() {
+    Player player;
+
+    player.display_status();
+
+    int pilihan;
+    cout << "Pilih nomor item yang ingin digunakan (1. Potion, 2. Adrenalin): ";
+    cin >> pilihan;
+    player.use_item(pilihan);
+
+    player.display_status();
+
+    return 0;
+}
